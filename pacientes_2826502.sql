@@ -24,55 +24,57 @@ USE `citas_2826502`;
 DROP TABLE IF EXISTS `citas`;
 CREATE TABLE IF NOT EXISTS `citas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` date DEFAULT NULL,
-  `hora` time DEFAULT NULL,
-  `consultorio` int(11) DEFAULT NULL,
-  `doctor_id` int(11) DEFAULT NULL,
-  `paciente_id` int(11) DEFAULT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  `hora` time NOT NULL,
+  `consultorio` int(11) NOT NULL DEFAULT 0,
+  `doctor_id` int(11) NOT NULL,
+  `paciente_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_citas_doctores` (`doctor_id`),
+  KEY `FK_citas_medicos` (`doctor_id`),
   KEY `FK_citas_pacientes` (`paciente_id`),
-  CONSTRAINT `FK_citas_doctores` FOREIGN KEY (`doctor_id`) REFERENCES `doctores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_citas_medicos` FOREIGN KEY (`doctor_id`) REFERENCES `medicos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_citas_pacientes` FOREIGN KEY (`paciente_id`) REFERENCES `pacientes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla citas_2826502.citas: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla citas_2826502.citas: ~4 rows (aproximadamente)
 DELETE FROM `citas`;
 INSERT INTO `citas` (`id`, `fecha`, `hora`, `consultorio`, `doctor_id`, `paciente_id`) VALUES
-	(1, '2024-11-14', '11:42:55', 413, 1, 1),
-	(2, '2024-02-21', '08:01:54', 201, 2, 2);
+	(1, '2030-10-10', '16:03:00', 413, 1, 2),
+	(2, '0000-00-00', '19:57:50', 401, 2, 2),
+	(3, '2026-02-14', '19:58:31', 306, 2, 1),
+	(7, '2024-02-14', '17:01:11', 302, 1, 2);
 
--- Volcando estructura para tabla citas_2826502.doctores
-DROP TABLE IF EXISTS `doctores`;
-CREATE TABLE IF NOT EXISTS `doctores` (
+-- Volcando estructura para tabla citas_2826502.medicos
+DROP TABLE IF EXISTS `medicos`;
+CREATE TABLE IF NOT EXISTS `medicos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `especialidad` varchar(50) DEFAULT NULL,
+  `nombres` varchar(50) NOT NULL,
+  `especialidad` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla citas_2826502.doctores: ~2 rows (aproximadamente)
-DELETE FROM `doctores`;
-INSERT INTO `doctores` (`id`, `nombre`, `especialidad`) VALUES
-	(1, 'Gustavo', 'neurologo'),
-	(2, 'Esteban', 'dentista');
+-- Volcando datos para la tabla citas_2826502.medicos: ~2 rows (aproximadamente)
+DELETE FROM `medicos`;
+INSERT INTO `medicos` (`id`, `nombres`, `especialidad`) VALUES
+	(1, 'Gustavo ', 'Pediatra'),
+	(2, 'Margarita', 'Oncologia');
 
 -- Volcando estructura para tabla citas_2826502.pacientes
 DROP TABLE IF EXISTS `pacientes`;
 CREATE TABLE IF NOT EXISTS `pacientes` (
-  `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
   `n_documento` bigint(20) NOT NULL DEFAULT 0,
-  `Celular` bigint(20) NOT NULL DEFAULT 0,
+  `celular` bigint(20) NOT NULL DEFAULT 0,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla citas_2826502.pacientes: ~2 rows (aproximadamente)
 DELETE FROM `pacientes`;
-INSERT INTO `pacientes` (`nombre`, `apellido`, `n_documento`, `Celular`, `id`) VALUES
-	('José', 'Anacona', 1010121806, 3166725117, 1),
-	('Vanessa', 'Solano', 929383928, 3029293039, 2);
+INSERT INTO `pacientes` (`Nombre`, `apellidos`, `n_documento`, `celular`, `id`) VALUES
+	('Jhosep', 'Medina', 1032386864, 3112434602, 1),
+	('Alejandro', 'Vidal', 1032386865, 3112434603, 2);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
