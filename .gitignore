@@ -1,0 +1,4 @@
+pr.py
+env/*
+migrations/*
+__pycache__/*
