@@ -16,6 +16,10 @@ db = SQLAlchemy(app)
 #Objeto para las migraciones
 migrate = Migrate(app , db)
 
+#importar rutas
+from . import routes
+
+
 #importar los modelos
 from .models import Medico, Paciente, Consultorio, Cita
 
