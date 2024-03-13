@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Detalle de paciente</h1>
-    <ul>
-        <li> Id: {{ paciente.id }}</li>
-        <li> Nombre: {{ paciente.nombre }}</li>
-        <li> Apellido: {{ paciente.apellidos }}</li>
-        <li> Tipo de Identificacion: {{ paciente.tipo_identificacion }}</li>
-        <li> Numero de Identificacion: {{ paciente.numero_identificacion }}</li>
-        <li> Altura: {{ paciente.altura }}</li>
-        <li> Tipo de sangre: {{ paciente.tipo_sangre }}</li>
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block titulo %} Paciente - {{ paciente.id }} {% endblock %}
+{% block contenido %}
+<h1>Detalle de paciente</h1>
+<ul>
+    <li> Id: {{ paciente.id }}</li>
+    <li> Nombre: {{ paciente.nombre }}</li>
+    <li> Apellido: {{ paciente.apellidos }}</li>
+    <li> Tipo de Identificacion: {{ paciente.tipo_identificacion }}</li>
+    <li> Numero de Identificacion: {{ paciente.numero_identificacion }}</li>
+    <li> Altura: {{ paciente.altura }}</li>
+    <li> Tipo de sangre: {{ paciente.tipo_sangre }}</li>
+</ul>
+{% endblock %}

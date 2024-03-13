@@ -48,3 +48,25 @@ def create_medico():
         db.session.add(new_medico)
         db.session.commit()
         return 'medico registrado'
+    
+@app.route('/pacientes/create', methods = ['GET', 'POST'])
+def create_paciente():
+    if request.method == 'GET':
+        rhs = ["A+", "A-", "B+", "B-", "O+", "O-"]
+        ti = ["CC", "CE", "Visa", "PEP"]
+        return render_template('paciente_form.html', rhs = rhs, ti = ti)
+    elif request.method == 'POST':
+        new_paciente = Paciente(nombre = request.form['nombre'], apellidos = request.form['apellido'], tipo_identificacion = request.form['ti'], numero_identificacion = request.form['ni'], altura = request.form['altura'], tipo_sangre = request.form['RH'])
+        db.session.add(new_paciente)
+        db.session.commit()
+        return 'paciente registrado'
+    
+@app.route('/consultorios/create', methods = ['GET', 'POST'])
+def create_consultorio():
+    if request.method == 'GET':
+        return render_template('consultorio_form.html')
+    elif request.method == 'POST':
+        new_consultorio = Consultorio(numero = request.form['numero'])
+        db.session.add(new_consultorio)
+        db.session.commit()
+        return 'consultorio registrado'

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block titulo %} Nuevo Medico {% endblock %}
+{% block titulo %} Nuevo Paciente {% endblock %}
 {% block contenido %}
 <section class="container">
-    <header>Nuevo Medico</header>
+    <header>Nuevo Paciente</header>
     <form action="" method="post" class="form">
         <section class="column">
             <article class="input-box">
@@ -30,16 +30,16 @@
             <input type="text" name="ni" placeholder="Numero Identificacion">
         </article>
         <article class="input-box">
-            <label>Registro Medico</label>
-            <input type="text" name="rm" placeholder="Registro Medico">
+            <label>Altura</label>
+            <input type="text" name="altura" placeholder="Altura">
         </article>
         <section class="column">
             <article class="es-box">
-                <label>Especialidad</label>
-                <select name="es">
-                    <option hidden>Especialidad</option>
-                    {% for es in especialidades %}
-                        <option value="{{ es }}"> {{ es }}</option>
+                <label>RH</label>
+                <select name="rh">
+                    <option hidden>RH</option>
+                    {% for rh in rhs %}
+                        <option value="{{ rh }}"> {{ rh }}</option>
                         {% endfor %}
                 </select>
             </article>

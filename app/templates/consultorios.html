@@ -1,35 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Consultorios</title>
-</head>
-<body>
-    <h1>Lista de Medicos</h1>
-    <table class="table table-hover">
-        <thead>
+{% extends "base.html" %}
+{% block titulo %} Consultorios {% endblock %}
+{% block contenido %}
+<h1>Lista de Medicos</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Ver Detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consultorio in consultorios %}
             <tr>
-                <th>Numero</th>
-                <th>Ver Detalles</th>
+                <td>{{ consultorio.numero }}</td>
+                <td><a href="/consultorios/{{ consultorio.id }}">Ver Detalles</a></td>
             </tr>
-        </thead>
-        <tbody>
-            {% for consultorio in consultorios %}
-                <tr>
-                    <td>{{ consultorio.numero }}</td>
-                    <td><a href="/consultorios/{{ consultorio.id }}">Ver Detalles</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td><a href="/pacientes">Pacientes</a></td>
-                <td><a href="/Medicos">Medicos</a></td>
-                <td><a href="/citas">Citas</a></td>
-            </tr>
-        </tfoot>
-    </table>
-</body>
-</html>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><a href="/pacientes">Pacientes</a></td>
+            <td><a href="/medicos">Medicos</a></td>
+            <td><a href="/citas">Citas</a></td>
+            <td><a href="/consultorios/create" target="_blank">Nuevo Consultorio</a></td>
+        </tr>
+    </tfoot>
+</table>
+{% endblock %}
