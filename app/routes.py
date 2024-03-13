@@ -1,6 +1,7 @@
 from . import app, db
 from .models import Medico, Paciente, Consultorio, Cita
-from flask import render_template, request
+from flask import render_template, request, flash, redirect
+from os import path
 
 @app.route('/medicos')
 def get_all_medicos():
@@ -47,7 +48,8 @@ def create_medico():
         new_medico = Medico(nombre = request.form['nombre'], apellidos = request.form['apellido'], tipo_identificacion = request.form['ti'], numero_identificacion = request.form['ni'], registro_medico = request.form['rm'], especialidad = request.form['es'])
         db.session.add(new_medico)
         db.session.commit()
-        return 'medico registrado'
+        flash('Medico Registrado Correctamente')
+        return redirect('/medicos')
     
 @app.route('/pacientes/create', methods = ['GET', 'POST'])
 def create_paciente():
@@ -70,3 +72,27 @@ def create_consultorio():
         db.session.add(new_consultorio)
         db.session.commit()
         return 'consultorio registrado'
+
+@app.route('/medicos/update/<int:id>', methods = ['GET', 'POST'])
+def update_medico(id):
+    medico_update = Medico.query.get(id)
+    especialidades = ["Cardiología", "Dermatología", "Gastroenterología", "Neurología", "Psiquiatría", "Pediatría", "Medicina Interna", "Oncología", "Ortopedia", "Oftalmología"]
+    ti = ["CC", "CE", "Visa", "PEP"]
+    if request.method == 'GET':
+        return render_template('medico_upgrade.html', medico_update = medico_update, especialidades = especialidades, ti = ti)
+    elif request.method == 'POST':
+        medico_update.nombre = request.form['nombre']
+        medico_update.apellidos = request.form['apellido']
+        medico_update.tipo_identificacion = request.form['ti']
+        medico_update.numero_identificacion = request.form['ni']
+        medico_update.registro_medico = request.form['rm']
+        medico_update.especialidad = request.form['es']
+        db.session.commit()
+        return 'medico actualizado'
+    
+@app.route('/medicos/delete/<int:id>')
+def delete_medico(id):
+    medico_delete = Medico.query.get(id)
+    db.session.delete(medico_delete)
+    db.session.commit()
+    return redirect('/medicos')

@@ -2,24 +2,28 @@
 {% block titulo %} Nuevo Medico {% endblock %}
 {% block contenido %}
 <section class="container">
-    <header>Nuevo Medico</header>
-    <form action="" method="post" class="form">
+    <header>Actualizar Medico</header>
+    <form action="/medicos/update/{{medico_update.id }}" method="post" class="form">
         <section class="column">
             <article class="input-box">
                 <label>Nombre</label>
-                <input type="text" name="nombre" placeholder="Nombre">
+                <input type="text" name="nombre" value="{{ medico_update.nombre }}">
             </article>
             <article class="input-box">
                 <label>Apellido</label>
-                <input type="text" name="apellido" placeholder="Apellido">
+                <input type="text" name="apellido" value="{{ medico_update.apellidos }}">
             </article>
         </section>
         <article class="ti-box">
-            <h3>Tipo de Documento</h3>
+            <h3>Tipo de Documento:</h3>
             <article class="ti-option">
                 {% for t in ti %}
                 <div class="ti">
-                    <input type="radio" id="check-{{ t }}" value="{{ t }}" name="ti">
+                    {% if medico_update.tipo_identificacion.lower() == t.lower() %}
+                        <input type="radio" id="check-{{ t }}" value="{{ t }}" name="ti" checked>
+                    {% else %}
+                        <input type="radio" id="check-{{ t }}" value="{{ t }}" name="ti">
+                    {% endif %}
                     <label for="check-{{ t }}">{{ t }}</label>
                 </div>
                 {% endfor %}
@@ -27,24 +31,24 @@
         </article>
         <article class="input-box">
             <label>Numero Identificacion</label>
-            <input type="text" name="ni" placeholder="Numero Identificacion">
+            <input type="text" name="ni"value="{{ medico_update.numero_identificacion }}">
         </article>
         <section class="column">
             <article class="input-box">
                 <label>Registro Medico</label>
-                <input type="text" name="rm" placeholder="Registro Medico">
+                <input type="text" name="rm" value="{{ medico_update.registro_medico }}">
             </article>
             <article class="es-box">
                 <label>Especialidad</label>
                 <select name="es">
-                    <option hidden>Especialidad</option>
+                    <option hidden>{{ medico_update.especialidad }}</option>
                     {% for es in especialidades %}
                         <option value="{{ es }}"> {{ es }}</option>
                         {% endfor %}
                 </select>
             </article>
         </section>
-        <button>Guardar</button>
+        <button>Actualizar</button>
     </form>
 </section>
 {% endblock %}
